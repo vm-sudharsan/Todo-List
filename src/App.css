@@ -1,0 +1,103 @@
+.App {
+  text-align: center;
+  max-width: 500px;
+  margin: auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #000000;
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #333333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #000000;
+  background: #f5f5f5;
+  border-radius: 5px;
+  margin: 5px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s;
+}
+
+li:hover {
+  background: #e5e5e5;
+}
+
+li.completed {
+  text-decoration: line-through;
+  color: #888888;
+}
+
+li input[type="text"] {
+  width: 70%;
+  border: none;
+  background: transparent;
+  color: #000000;
+}
+
+li input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+li .todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .App {
+    width: 100%;
+    padding: 10px;
+  }
+
+  input[type="text"] {
+    width: 70%;
+  }
+
+  button {
+    padding: 5px;
+    margin: 5px;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  li input[type="text"] {
+    width: 100%;
+  }
+}
