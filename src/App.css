@@ -5,29 +5,42 @@
   background: #ffffff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: #000000;
+  font-family: 'Arial', sans-serif;
 }
 
-input[type="text"] {
-  width: 80%;
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.input-container input[type="text"], .input-container input[type="time"] {
+  width: 48%;
   padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #000000;
-  border-radius: 5px;
+  margin: 0;
+  border: 2px solid #000000;
+  border-radius: 0;
   background: #ffffff;
   color: #000000;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="time"]:focus {
+  border-color: #000000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 button {
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0;
   cursor: pointer;
   background: #000000;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
-  transition: background 0.3s;
+  border-radius: 0;
+  transition: background 0.3s ease;
 }
 
 button:hover {
@@ -45,15 +58,15 @@ li {
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #000000;
-  background: #f5f5f5;
-  border-radius: 5px;
+  background: #ffffff;
+  border-radius: 0;
   margin: 5px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 li:hover {
-  background: #e5e5e5;
+  background: #f5f5f5;
 }
 
 li.completed {
@@ -77,14 +90,20 @@ li .todo-actions {
   gap: 10px;
 }
 
+.time {
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #ff0000;
+}
+
 @media (max-width: 600px) {
   .App {
     width: 100%;
     padding: 10px;
   }
 
-  input[type="text"] {
-    width: 70%;
+  .input-container input[type="text"], .input-container input[type="time"] {
+    width: 40%;
   }
 
   button {
