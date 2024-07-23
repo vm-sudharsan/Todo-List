@@ -55,6 +55,22 @@ function App() {
     setEditId(id);
   };
 
+  const calculateRemainingTime = (time) => {
+    if (!time) return '';
+    const currentTime = new Date();
+    const taskTime = new Date();
+    const [hours, minutes] = time.split(':').map(Number);
+    taskTime.setHours(hours, minutes, 0);
+
+    const diffMs = taskTime - currentTime;
+    if (diffMs <= 0) return 'Time passed';
+
+    const diffHrs = Math.floor(diffMs / 1000 / 60 / 60);
+    const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / 1000 / 60);
+
+    return `${diffHrs} hrs ${diffMins} mins left`;
+  };
+
   return (
     <div className="App">
       <h1>To-Do List</h1>
@@ -79,6 +95,7 @@ function App() {
           <li key={todo.id} className={todo.completed ? 'completed' : ''}>
             <span>{todo.text}</span>
             {todo.time && <span className="time">Time: {todo.time}</span>}
+            <span className="remaining-time">{calculateRemainingTime(todo.time)}</span>
             <div className="todo-actions">
               <button onClick={() => toggleTodo(todo.id)}>
                 {todo.completed ? 'Undo' : 'Complete'}

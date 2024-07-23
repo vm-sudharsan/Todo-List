@@ -96,6 +96,14 @@ li .todo-actions {
   color: #ff0000;
 }
 
+.remaining-time {
+  background-color: orange;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
 @media (max-width: 600px) {
   .App {
     width: 100%;
