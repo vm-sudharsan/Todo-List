@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function ValidationButton({ input, time, setValidationMessage }) {
   function handleClick() {
     if (!input || !time) {
-      setValidationMessage('Please fill both fields');
+      setValidationMessage('Please fill both fields ....');
     } else {
       setValidationMessage('');
     }
