@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
   const [time, setTime] = useState('');
   const [editId, setEditId] = useState(null);
+  const [validationMessage, setValidationMessage] = useState('');
 
   useEffect(() => {
     const savedTodos = JSON.parse(localStorage.getItem('todos'));
@@ -19,37 +19,45 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (input.trim()) {
-      if (editId !== null) {
-        const updatedTodos = todos.map((todo) =>
-          todo.id === editId ? { ...todo, text: input, time: time } : todo
-        );
-        setTodos(updatedTodos);
-        setEditId(null);
-      } else {
-        setTodos([...todos, { id: uuidv4(), text: input, completed: false, time: time }]);
-      }
-      setInput('');
-      setTime('');
+  const addTodo = (event) => {
+    event.preventDefault();
+
+    if (!input || !time) {
+      setValidationMessage('Please fill both fields');
+      return;
     }
+
+    setValidationMessage('');
+
+    if (editId !== null) {
+      setTodos(todos.map((todo) =>
+        todo.id === editId
+          ? { ...todo, text: input, time: time }
+          : todo
+      ));
+      setEditId(null);
+    } else {
+      setTodos([
+        ...todos,
+        { id: Date.now(), text: input, completed: false, time: time }
+      ]);
+    }
+    setInput('');
+    setTime('');
   };
 
   const toggleTodo = (id) => {
-    const newTodos = todos.map(todo =>
+    setTodos(todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(newTodos);
+    ));
   };
 
   const deleteTodo = (id) => {
-    const newTodos = todos.filter(todo => todo.id !== id);
-    setTodos(newTodos);
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   const editTodo = (id) => {
-    const todoToEdit = todos.find(todo => todo.id === id);
+    const todoToEdit = todos.find((todo) => todo.id === id);
     setInput(todoToEdit.text);
     setTime(todoToEdit.time || '');
     setEditId(id);
@@ -60,16 +68,16 @@ function App() {
     const currentTime = new Date();
     const taskTime = new Date();
     const [hours, minutes] = time.split(':').map(Number);
-    taskTime.setHours(hours, minutes, 0);
+    taskTime.setHours(hours, minutes, 60);
 
     const diffMs = taskTime - currentTime;
     if (diffMs <= 0) return 'Time passed';
 
     const diffHrs = Math.floor(diffMs / 1000 / 60 / 60);
     const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / 1000 / 60);
-
-    return `${diffHrs} hrs ${diffMins} mins left`;
+    return diffHrs + " hrs " + diffMins + " mins left";
   };
+  
 
   return (
     <div className="App">
@@ -90,7 +98,8 @@ function App() {
         </div>
         <button type="submit">{editId !== null ? 'Update' : 'Add'}</button>
       </form>
-      <ul>
+      {validationMessage && <p className="validation-message">{validationMessage}</p>}
+      <ul id="todo-list">
         {todos.map((todo) => (
           <li key={todo.id} className={todo.completed ? 'completed' : ''}>
             <span>{todo.text}</span>

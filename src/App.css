@@ -1,52 +1,58 @@
+/* Background color and general styling */
 .App {
   text-align: center;
   max-width: 500px;
   margin: auto;
-  background: #ffffff;
+  background: #E8F5E9; /* Pista green background */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: #000000;
+  color: #3E2723; /* Cocoa brown text color */
   font-family: 'Arial', sans-serif;
 }
 
+/* Styling for input fields */
 .input-container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.input-container input[type="text"], .input-container input[type="time"] {
+.input-container input[type="text"],
+.input-container input[type="time"] {
   width: 48%;
   padding: 10px;
   margin: 0;
-  border: 2px solid #000000;
-  border-radius: 0;
+  border: 2px solid #3E2723; /* Cocoa brown border */
+  border-radius: 5px; /* Rounded corners */
   background: #ffffff;
-  color: #000000;
+  color: #3E2723; /* Cocoa brown text */
   transition: all 0.3s ease;
 }
 
-input[type="text"]:focus, input[type="time"]:focus {
-  border-color: #000000;
+input[type="text"]:focus,
+input[type="time"]:focus {
+  border-color: #388E3C; /* Dark pista green */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Button styling */
 button {
   padding: 10px;
   margin: 10px 0;
   cursor: pointer;
-  background: #000000;
+  background: #3E2723; /* Cocoa brown background */
   color: #ffffff;
   border: none;
-  border-radius: 0;
+  border-radius: 5px; /* Rounded corners */
   transition: background 0.3s ease;
 }
 
 button:hover {
-  background: #333333;
+  background: #6D4C41; /* Lighter cocoa brown */
 }
 
+/* List and list item styling */
 ul {
   list-style-type: none;
   padding: 0;
@@ -57,16 +63,16 @@ li {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #3E2723; /* Cocoa brown border */
   background: #ffffff;
-  border-radius: 0;
+  border-radius: 5px; /* Rounded corners */
   margin: 5px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease;
 }
 
 li:hover {
-  background: #f5f5f5;
+  background: #F1F8E9; /* Light pista green */
 }
 
 li.completed {
@@ -74,43 +80,43 @@ li.completed {
   color: #888888;
 }
 
-li input[type="text"] {
-  width: 70%;
-  border: none;
-  background: transparent;
-  color: #000000;
-}
-
-li input[type="checkbox"] {
-  margin-right: 10px;
-}
-
+/* Action buttons in list items */
 li .todo-actions {
   display: flex;
   gap: 10px;
 }
 
+/* Time and remaining time styling */
 .time {
   margin-left: 10px;
   font-size: 0.9em;
-  color: #ff0000;
+  color: #D32F2F; /* Red for time label */
 }
 
 .remaining-time {
-  background-color: orange;
+  background-color: #4CAF50; /* Pista green */
   color: white;
   padding: 5px;
   border-radius: 5px;
   margin-left: 10px;
 }
 
+/* Validation message styling */
+.validation-message {
+  color: #D32F2F; /* Red */
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+
+/* Responsive design */
 @media (max-width: 600px) {
   .App {
     width: 100%;
     padding: 10px;
   }
 
-  .input-container input[type="text"], .input-container input[type="time"] {
+  .input-container input[type="text"],
+  .input-container input[type="time"] {
     width: 40%;
   }
 
