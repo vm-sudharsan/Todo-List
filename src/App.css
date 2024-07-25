@@ -16,7 +16,8 @@
   margin-bottom: 10px;
 }
 
-.input-container input[type="text"], .input-container input[type="time"] {
+.input-container input[type="text"],
+.input-container input[type="time"] {
   width: 48%;
   padding: 10px;
   margin: 0;
@@ -27,7 +28,8 @@
   transition: all 0.3s ease;
 }
 
-input[type="text"]:focus, input[type="time"]:focus {
+input[type="text"]:focus,
+input[type="time"]:focus {
   border-color: #000000;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -74,17 +76,6 @@ li.completed {
   color: #888888;
 }
 
-li input[type="text"] {
-  width: 70%;
-  border: none;
-  background: transparent;
-  color: #000000;
-}
-
-li input[type="checkbox"] {
-  margin-right: 10px;
-}
-
 li .todo-actions {
   display: flex;
   gap: 10px;
@@ -104,13 +95,20 @@ li .todo-actions {
   margin-left: 10px;
 }
 
+.validation-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+
 @media (max-width: 600px) {
   .App {
     width: 100%;
     padding: 10px;
   }
 
-  .input-container input[type="text"], .input-container input[type="time"] {
+  .input-container input[type="text"],
+  .input-container input[type="time"] {
     width: 40%;
   }
 
