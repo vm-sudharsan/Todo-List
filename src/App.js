@@ -77,44 +77,48 @@ function App() {
     const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / 1000 / 60);
     return diffHrs + " hrs " + diffMins + " mins left";
   };
-  
 
   return (
     <div className="App">
-      <h1>To-Do List</h1>
-      <form onSubmit={addTodo}>
-        <div className="input-container">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Add a new task"
-          />
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-        </div>
-        <button type="submit">{editId !== null ? 'Update' : 'Add'}</button>
-      </form>
-      {validationMessage && <p className="validation-message">{validationMessage}</p>}
-      <ul id="todo-list">
-        {todos.map((todo) => (
-          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
-            <span>{todo.text}</span>
-            {todo.time && <span className="time">Time: {todo.time}</span>}
-            <span className="remaining-time">{calculateRemainingTime(todo.time)}</span>
-            <div className="todo-actions">
-              <button onClick={() => toggleTodo(todo.id)}>
-                {todo.completed ? 'Undo' : 'Complete'}
-              </button>
-              <button onClick={() => editTodo(todo.id)}>Edit</button>
-              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="container">
+        <h1>To-Do List <span role="img" aria-label="emoji">📝</span></h1>
+        <form onSubmit={addTodo}>
+          <div className="input-container">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Add your task"
+            />
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
+            <button type="submit">{editId !== null ? 'Update' : 'Add'}</button>
+          </div>
+        </form>
+        {validationMessage && <p className="validation-message">{validationMessage}</p>}
+        <ul id="todo-list">
+          {todos.map((todo) => (
+            <li key={todo.id} className={todo.completed ? 'completed' : ''}>
+              <div className="todo-text">
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => toggleTodo(todo.id)}
+                />
+                <span>{todo.text}</span>
+                <span className="todo-time">{calculateRemainingTime(todo.time)}</span>
+              </div>
+              <div className="todo-actions">
+                <button onClick={() => editTodo(todo.id)}>✏️</button>
+                <button onClick={() => deleteTodo(todo.id)}>❌</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

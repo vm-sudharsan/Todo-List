@@ -1,58 +1,70 @@
-/* Background color and general styling */
-.App {
-  text-align: center;
-  max-width: 500px;
-  margin: auto;
-  background: #E8F5E9; /* Pista green background */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: #3E2723; /* Cocoa brown text color */
-  font-family: 'Arial', sans-serif;
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Tahoma', Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Styling for input fields */
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 60vw; /* Adjusted for 3:2 aspect ratio */
+  max-width: 600px;
+  text-align: center;
+  aspect-ratio: 3 / 2;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
 .input-container {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  justify-content: center;
+  gap: 10px; /* Added gap for spacing between elements */
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .input-container input[type="text"],
 .input-container input[type="time"] {
-  width: 48%;
+  width: calc(70% / 2); /* Adjust width for text and time input */
   padding: 10px;
-  margin: 0;
-  border: 2px solid #3E2723; /* Cocoa brown border */
-  border-radius: 5px; /* Rounded corners */
-  background: #ffffff;
-  color: #3E2723; /* Cocoa brown text */
-  transition: all 0.3s ease;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
 }
 
-input[type="text"]:focus,
-input[type="time"]:focus {
-  border-color: #388E3C; /* Dark pista green */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Button styling */
-button {
+.input-container button {
+  width: 20%;
   padding: 10px;
-  margin: 10px 0;
-  cursor: pointer;
-  background: #3E2723; /* Cocoa brown background */
-  color: #ffffff;
+  background-color: #ff6f61;
+  color: white;
   border: none;
-  border-radius: 5px; /* Rounded corners */
-  transition: background 0.3s ease;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-button:hover {
-  background: #6D4C41; /* Lighter cocoa brown */
+.input-container button:hover {
+  background-color: #e65c50;
 }
 
-/* List and list item styling */
 ul {
   list-style-type: none;
   padding: 0;
@@ -63,16 +75,7 @@ li {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #3E2723; /* Cocoa brown border */
-  background: #ffffff;
-  border-radius: 5px; /* Rounded corners */
-  margin: 5px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease;
-}
-
-li:hover {
-  background: #F1F8E9; /* Light pista green */
+  border-bottom: 1px solid #ddd;
 }
 
 li.completed {
@@ -80,57 +83,31 @@ li.completed {
   color: #888888;
 }
 
-/* Action buttons in list items */
-li .todo-actions {
+.todo-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-time {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.todo-actions {
   display: flex;
   gap: 10px;
 }
 
-/* Time and remaining time styling */
-.time {
-  margin-left: 10px;
-  font-size: 0.9em;
-  color: #D32F2F; /* Red for time label */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.remaining-time {
-  background-color: #4CAF50; /* Pista green */
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-
-/* Validation message styling */
 .validation-message {
-  color: #D32F2F; /* Red */
+  color: #ff6f61;
   font-size: 0.9em;
   margin-top: 10px;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-  .App {
-    width: 100%;
-    padding: 10px;
-  }
-
-  .input-container input[type="text"],
-  .input-container input[type="time"] {
-    width: 40%;
-  }
-
-  button {
-    padding: 5px;
-    margin: 5px;
-  }
-
-  li {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  li input[type="text"] {
-    width: 100%;
-  }
 }
