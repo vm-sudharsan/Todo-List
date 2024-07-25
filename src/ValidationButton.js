@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function ValidationButton({ input, time, setValidationMessage }) {
+function ValidationButton({ input, time, setValidationMessage }) {
   function handleClick() {
     if (!input || !time) {
       setValidationMessage('Please fill both fields');
@@ -15,3 +16,11 @@ export default function ValidationButton({ input, time, setValidationMessage }) 
     </button>
   );
 }
+
+ValidationButton.propTypes = {
+  input: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  setValidationMessage: PropTypes.func.isRequired,
+};
+
+export default ValidationButton;
