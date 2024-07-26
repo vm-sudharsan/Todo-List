@@ -19,6 +19,13 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
+  const toPascalCase = (str) => {
+    return str
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  };
+
   const addTodo = (event) => {
     event.preventDefault();
 
@@ -32,14 +39,14 @@ function App() {
     if (editId !== null) {
       setTodos(todos.map((todo) =>
         todo.id === editId
-          ? { ...todo, text: input, time: time }
+          ? { ...todo, text: toPascalCase(input), time: time }
           : todo
       ));
       setEditId(null);
     } else {
       setTodos([
         ...todos,
-        { id: Date.now(), text: input, completed: false, time: time }
+        { id: Date.now(), text: toPascalCase(input), completed: false, time: time }
       ]);
     }
     setInput('');
@@ -106,7 +113,7 @@ function App() {
                 <input
                   type="checkbox"
                   checked={todo.completed}
-                  onChange={() => toggleTodo(todo.id)}
+                  onChange={() => toggleTodo(todo.id)}  
                 />
                 <span>{todo.text}</span>
                 <span className="todo-time">{calculateRemainingTime(todo.time)}</span>
