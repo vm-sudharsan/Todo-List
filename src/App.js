@@ -2,125 +2,125 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
-  const [time, setTime] = useState('');
-  const [editId, setEditId] = useState(null);
-  const [validationMessage, setValidationMessage] = useState('');
+  const [Todos, SetTodos] = useState([]);
+  const [TaskInput, SetTaskInput] = useState('');
+  const [TaskTime, SetTaskTime] = useState('');
+  const [EditId, SetEditId] = useState(null);
+  const [ValidationMessage, SetValidationMessage] = useState('');
 
   useEffect(() => {
-    const savedTodos = JSON.parse(localStorage.getItem('todos'));
-    if (savedTodos) {
-      setTodos(savedTodos);
+    const SavedTodos = JSON.parse(localStorage.getItem('Todos'));
+    if (SavedTodos) {
+      SetTodos(SavedTodos);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem('Todos', JSON.stringify(Todos));
+  }, [Todos]);
 
-  const toPascalCase = (str) => {
-    return str
+  const ToPascalCase = (InputTodoString) => {
+    return InputTodoString
       .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .map(InputTask => InputTask.charAt(0).toUpperCase() + InputTask.slice(1).toLowerCase())
       .join(' ');
   };
 
-  const addTodo = (event) => {
-    event.preventDefault();
+  const AddTodo = (Event) => {
+    Event.preventDefault();
 
-    if (!input || !time) {
-      setValidationMessage('Please fill both fields');
+    if (!TaskInput || !TaskTime) {
+      SetValidationMessage('Please fill both fields');
       return;
     }
 
-    setValidationMessage('');
+    SetValidationMessage('');
 
-    if (editId !== null) {
-      setTodos(todos.map((todo) =>
-        todo.id === editId
-          ? { ...todo, text: toPascalCase(input), time: time }
-          : todo
+    if (EditId !== null) {
+      SetTodos(Todos.map((Todo) =>
+        Todo.id === EditId
+          ? { ...Todo, Text: ToPascalCase(TaskInput), Time: TaskTime }
+          : Todo
       ));
-      setEditId(null);
+      SetEditId(null);
     } else {
-      setTodos([
-        ...todos,
-        { id: Date.now(), text: toPascalCase(input), completed: false, time: time }
+      SetTodos([
+        ...Todos,
+        { id: Date.now(), Text: ToPascalCase(TaskInput), Completed: false, Time: TaskTime }
       ]);
     }
-    setInput('');
-    setTime('');
+    SetTaskInput('');
+    SetTaskTime('');
   };
 
-  const toggleTodo = (id) => {
-    setTodos(todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+  const ToggleTodo = (Id) => {
+    SetTodos(Todos.map((Todo) =>
+      Todo.id === Id ? { ...Todo, Completed: !Todo.Completed } : Todo
     ));
   };
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const DeleteTodo = (Id) => {
+    SetTodos(Todos.filter((Todo) => Todo.id !== Id));
   };
 
-  const editTodo = (id) => {
-    const todoToEdit = todos.find((todo) => todo.id === id);
-    setInput(todoToEdit.text);
-    setTime(todoToEdit.time || '');
-    setEditId(id);
+  const EditTodo = (Id) => {
+    const TodoToEdit = Todos.find((Todo) => Todo.id === Id);
+    SetTaskInput(TodoToEdit.Text);
+    SetTaskTime(TodoToEdit.Time || '');
+    SetEditId(Id);
   };
 
-  const calculateRemainingTime = (time) => {
-    if (!time) return '';
-    const currentTime = new Date();
-    const taskTime = new Date();
-    const [hours, minutes] = time.split(':').map(Number);
-    taskTime.setHours(hours, minutes, 60);
+  const CalculateRemainingTime = (TaskTime) => {
+    if (!TaskTime) return '';
+    const CurrentTime = new Date();
+    const TaskDateTime = new Date();
+    const [Hours, Minutes] = TaskTime.split(':').map(Number);
+    TaskDateTime.setHours(Hours, Minutes, 0);
 
-    const diffMs = taskTime - currentTime;
-    if (diffMs <= 0) return 'Time passed';
+    const DiffMs = TaskDateTime - CurrentTime;
+    if (DiffMs <= 0) return 'Time passed';
 
-    const diffHrs = Math.floor(diffMs / 1000 / 60 / 60);
-    const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / 1000 / 60);
-    return diffHrs + " hrs " + diffMins + " mins left";
+    const DiffHrs = Math.floor(DiffMs / 1000 / 60 / 60);
+    const DiffMins = Math.floor((DiffMs % (1000 * 60 * 60)) / 1000 / 60);
+    return `${DiffHrs} hrs ${DiffMins} mins left`;
   };
 
   return (
     <div className="App">
-      <div className="container">
+      <div className="Container">
         <h1>To-Do List <span role="img" aria-label="emoji">📝</span></h1>
-        <form onSubmit={addTodo}>
-          <div className="input-container">
+        <form onSubmit={AddTodo}>
+          <div className="InputContainer">
             <input
               type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              value={TaskInput}
+              onChange={(e) => SetTaskInput(e.target.value)}
               placeholder="Add your task"
             />
             <input
               type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
+              value={TaskTime}
+              onChange={(e) => SetTaskTime(e.target.value)}
             />
-            <button type="submit">{editId !== null ? 'Update' : 'Add'}</button>
+            <button type="submit">{EditId !== null ? 'Update' : 'Add'}</button>
           </div>
         </form>
-        {validationMessage && <p className="validation-message">{validationMessage}</p>}
-        <ul id="todo-list">
-          {todos.map((todo) => (
-            <li key={todo.id} className={todo.completed ? 'completed' : ''}>
-              <div className="todo-text">
+        {ValidationMessage && <p className="ValidationMessage">{ValidationMessage}</p>}
+        <ul id="TodoList">
+          {Todos.map((Todo) => (
+            <li key={Todo.id} className={Todo.Completed ? 'Completed' : ''}>
+              <div className="TodoText">
                 <input
                   type="checkbox"
-                  checked={todo.completed}
-                  onChange={() => toggleTodo(todo.id)}  
+                  checked={Todo.Completed}
+                  onChange={() => ToggleTodo(Todo.id)}  
                 />
-                <span>{todo.text}</span>
-                <span className="todo-time">{calculateRemainingTime(todo.time)}</span>
+                <span>{Todo.Text}</span>
+                <span className="TodoTime">{CalculateRemainingTime(Todo.Time)}</span>
               </div>
-              <div className="todo-actions">
-                <button onClick={() => editTodo(todo.id)}>✏️</button>
-                <button onClick={() => deleteTodo(todo.id)}>❌</button>
+              <div className="TodoActions">
+                <button onClick={() => EditTodo(Todo.id)}>✏️</button>
+                <button onClick={() => DeleteTodo(Todo.id)}>❌</button>
               </div>
             </li>
           ))}
