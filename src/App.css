@@ -2,8 +2,8 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Tahoma', Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Times New Roman', Times, serif;
+  background: linear-gradient(135deg, #627deb 0%, #a079e9 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,7 @@ body, html {
   border-radius: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 60vw; /* Adjusted for 3:2 aspect ratio */
+  width: 60vw;
   max-width: 600px;
   text-align: center;
   aspect-ratio: 3 / 2;
@@ -36,14 +36,14 @@ h1 {
 .input-container {
   display: flex;
   justify-content: center;
-  gap: 10px; /* Added gap for spacing between elements */
+  gap: 10px;
   margin-bottom: 20px;
   width: 100%;
 }
 
 .input-container input[type="text"],
 .input-container input[type="time"] {
-  width: calc(70% / 2); /* Adjust width for text and time input */
+  width: calc(70% / 2);
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
